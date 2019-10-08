@@ -794,6 +794,19 @@ function createForm<FormValues: FormValuesShape>(
           visited: false
         }
       }
+
+      if (!state.fields[name].blur) {
+        state.fields[name].blur = () => api.blur(name);
+      }
+
+      if (!state.fields[name].change) {
+        state.fields[name].change = value => api.change(name, value);
+      }
+
+      if (!state.fields[name].focus) {
+        state.fields[name].focus = () => api.focus(name);
+      }
+
       let haveValidator = false
       if (fieldConfig) {
         haveValidator = !!(
